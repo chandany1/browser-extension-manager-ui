@@ -1,7 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root{
     margin: 0;
 }
 
 body {
-    background-color: darkolivegreen;
+    background: linear-gradient(180deg, #040918 0%, #091540 100%);
+    background-repeat: no-repeat;
+    min-width: 100vh;
+    min-height: 100vh;
+    color: aliceblue;
+    font-family: "Noto Sans", sans-serif;
 }
