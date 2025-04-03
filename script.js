@@ -3,6 +3,7 @@ const body = document.body;
 const menuItems = document.querySelectorAll("#menu li");
 const extensionsGrid = document.querySelector('.extensions-grid')
 let extensions = [];
+let selectedChoice  = 'all';
 fetch('./data.json')
 .then(response => response.json())
 .then((data) => {
@@ -24,24 +25,36 @@ themeIcon.addEventListener('click',function(){
 
 menuItems.forEach(item => {
   item.addEventListener("click", function() {
-    const choice = this.innerText;
-      const data = extensions.filter((ext)=>{
-        if(choice==='Active'){
-          return ext.isActive == true;
-        }else if(choice==='Inactive'){
-          return ext.isActive == false;
-        }else{
-          return ext;
-        }
-      })
-
-      createGridItems(data)
+    selectedChoice = this.innerText;
+    renderUpdatedGridItems(selectedChoice);
     
     menuItems
     .forEach(li => li.classList.remove("active"));
       this.classList.add("active");
   });
 });
+
+extensionsGrid.addEventListener('click',function(e){
+  const clickedItemText = e.target.innerText;
+  if(clickedItemText==='Remove'){
+    const name = e.target.getAttribute('name');
+    extensions = extensions.filter(obj => obj.name !== name)
+    renderUpdatedGridItems(selectedChoice);
+  }
+});
+
+function renderUpdatedGridItems(choice){
+  const data = extensions.filter((ext)=>{
+    if(choice==='Active'){
+      return ext.isActive == true;
+    }else if(choice==='Inactive'){
+      return ext.isActive == false;
+    }else{
+      return ext;
+    }
+  })
+  createGridItems(data)
+}
 
 function createGridItems(items){
   extensionsGrid.innerHTML = ""
@@ -76,6 +89,7 @@ function createGridItems(items){
     const removeBtn = document.createElement('div');
     removeBtn.classList.add('grid-item-remove-btn');
     removeBtn.tabIndex = 0; 
+    removeBtn.setAttribute('name',item.name);
     removeBtn.innerText = 'Remove';
 
     const label = document.createElement('label');
