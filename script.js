@@ -75,6 +75,7 @@ function createGridItems(items){
     bottomContainer.classList.add('grid-item-bottom-container');
     const removeBtn = document.createElement('div');
     removeBtn.classList.add('grid-item-remove-btn');
+    removeBtn.tabIndex = 0; 
     removeBtn.innerText = 'Remove';
     bottomContainer.appendChild(removeBtn);
 
