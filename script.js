@@ -45,7 +45,6 @@ menuItems.forEach(item => {
 
 function createGridItems(items){
   extensionsGrid.innerHTML = ""
-
   items.forEach((item)=>{
     //console.log(ext)
     const container = document.createElement('div');
@@ -73,11 +72,24 @@ function createGridItems(items){
 
     const bottomContainer = document.createElement('div');
     bottomContainer.classList.add('grid-item-bottom-container');
+    
     const removeBtn = document.createElement('div');
     removeBtn.classList.add('grid-item-remove-btn');
     removeBtn.tabIndex = 0; 
     removeBtn.innerText = 'Remove';
+
+    const label = document.createElement('label');
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.checked = item.isActive;
+    const span = document.createElement('span');
+    span.tabIndex = 0;
+    span.classList.add('slider');
+    label.appendChild(checkbox);
+    label.appendChild(span);
+    label.classList.add('switch');
     bottomContainer.appendChild(removeBtn);
+    bottomContainer.appendChild(label);
 
     container.appendChild(upperContainer);
     container.appendChild(bottomContainer);
